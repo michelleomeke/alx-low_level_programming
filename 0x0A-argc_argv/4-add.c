@@ -1,5 +1,5 @@
 #include <stdio.h>
-i#include <stdlib.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 
