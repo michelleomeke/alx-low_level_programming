@@ -1,43 +1,47 @@
 #include <stdlib.h>
 #include "main.h"
 /**
- * **alloc_grid - creates a two dimensional array of ints
- * @width: width of the matrix
- * @height: height of the matrix
- * Return: pointer to the created matrix (Success)
- * or NULL (Error)
+ * str_concat - concatenates two strings
+ * @s1: first string parameter
+ * @s2: Second string parameter
+ * Return: pointer to the concatenated string(Success)
+ * NULL if empty string(failure)
  */
-int **alloc_grid(int width, int height)
+char *str_concat(char *s1, char *s2)
 {
-	int **arr;
-	int i, j;
+	char *s3;
+	unsigned int i = 0, j = 0, len1 = 0, len2 = 0;
 
-	if (height <= 0 || width <= 0)
+	while (s1 && s1[len1])
+		len1++;
+	while (s2 && s2[len2])
+		len2++;
+
+	s3 = malloc(sizeof(char) * (len1 + len2 + 1));
+	if (s3 == NULL)
 		return (NULL);
 
-	arr = (int **) malloc(sizeof(int *) * height);
+	i = 0;
+	j = 0;
 
-	if (arr == NULL)
-		return (NULL);
-
-	for (i = 0; i < height; i++)
+	if (s1)
 	{
-		arr[i] = (int *) malloc(sizeof(int) * width);
-		if (arr[i] == NULL)
+		while (i < len1)
 		{
-			free(arr);
-			for (j = 0; j <= i; j++)
-				free(arr[j]);
-			return (NULL);
+			s3[i] = s1[i];
+			i++;
 		}
 	}
 
-	for (i = 0; i < height; i++)
+	if (s2)
 	{
-		for (j = 0; j < width; j++)
+		while (i < (len1 + len2))
 		{
-			arr[i][j] = 0;
+			s3[i] = s2[j];
+			i++;
+			j++;
 		}
 	}
-	return (arr);
+	s3[i] = '\0';
+	return (s3);
 }
