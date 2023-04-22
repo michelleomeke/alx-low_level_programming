@@ -1,82 +1,71 @@
 #include "3-calc.h"
-
-int op_add(int a, int b);
-int op_sub(int a, int b);
-int op_mul(int a, int b);
-int op_div(int a, int b);
-int op_mod(int a, int b);
+#include <stdlib.h>
 
 
+typedef int (*op_func)(int, int);  // Define a function pointer type
 
 /**
- * op_add - Returns the sum of two numbers.
- * @a: The first number.
- * @b: The second number.
+ * get_op_func - Returns a function pointer based on the given operator.
+ * @s: The operator as a string.
  *
- * Return: The sum of a and b.
+ * Return: A function pointer corresponding to the given operator.
  */
-
-
-int op_add(int a, int b)
+op_func get_op_func(char *s)
 {
-	return (a + b);
+	if (s == NULL)
+		return (NULL);
+	if (*s == '+')
+		return (op_add);
+	if (*s == '-')
+		return (op_sub);
+	if (*s == '*')
+		return (op_mul);
+	if (*s == '/')
+		return (op_div);
+	if (*s == '%')
+		return (op_mod);
+	return (NULL);
 }
-
 
 /**
- * op_sub - Returns the difference of two numbers.
- * @a: The first number.
- * @b: The second number.
+ * main - Prints the result of simple operations.
+ * @argc: The number of arguments supplied to the program.
+ * @argv: An array of pointers to the arguments.
  *
- * Return: The difference of a and b.
+ * Return: Always 0.
  */
-
-
-int op_sub(int a, int b)
+int main(int argc, char *argv[])
 {
-	return (a - b);
+	int num1, num2, result;
+	char *op;
+	op_func func;
+
+	if (argc != 4)
+	{
+		printf("Error\n");
+		return (98);
+	}
+
+	num1 = atoi(argv[1]);
+	op = argv[2];
+	num2 = atoi(argv[3]);
+
+	func = get_op_func(op);
+	if (func == NULL || op[1] != '\0')
+	{
+		printf("Error\n");
+		return (99);
+	}
+
+	if ((*op == '/' && num2 == 0) ||
+	    (*op == '%' && num2 == 0))
+	{
+		printf("Error\n");
+		return (100);
+	}
+
+	result = func(num1, num2);
+	printf("%d\n", result);
+
+	return (0);
 }
-
-
-/**
- * op_mul - Returns the product of two numbers.
- * @a: The first number.
- * @b: The second number.
- *
- * Return: The product of a and b.
- */
-int op_mul(int a, int b)
-{
-	return (a * b);
-}
-
-
-/**
- * op_div - Returns the division of two numbers.
- * @a: The first number.
- * @b: The second number.
- *
- * Return: The quotient of a and b.
- */
-
-
-int op_div(int a, int b)
-{
-	return (a / b);
-}
-
-
-/**
- * op_mod - Returns the remainder of the division of two numbers.
- * @a: The first number.
- * @b: The second number.
- *
- * Return: The remainder of the division of a by b.
- */
-
-
-int op_mod(int a, int b)
-{
-	return (a % b);
-}
-
