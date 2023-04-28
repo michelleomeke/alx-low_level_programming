@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
 #include "lists.h"
 
@@ -12,14 +11,13 @@
 size_t list_len(const list_t *h)
 {
 size_t count = 0;
-printf("The length of my list is %lu\n", len);
-
 while (h != NULL)
 {
 count++;
 h = h->next;
 }
 
+printf("The length of my list is %lu\n", count);
+
 return (count);
 }
-
