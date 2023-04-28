@@ -9,6 +9,7 @@
 *
 * Return: the number of elements in the list
 */
+
 size_t list_len(const list_t *h)
 {
 size_t count = 0;
@@ -22,3 +23,4 @@ printf("The length of my list is %lu\n", count);
 
 return (count);
 }
+
