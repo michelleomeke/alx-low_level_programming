@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 #include "lists.h"
 
 /**
@@ -16,6 +19,6 @@ count++;
 h = h->next;
 }
 
-    return (count);
+return (count);
 }
 
